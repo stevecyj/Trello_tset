@@ -1,9 +1,7 @@
-// require("dotenv").config();
+require("dotenv").config();
 
 const env = (key, defaultValue) => {
-  console.log('######', process.env);
   return typeof process.env[key] === "undefined" ? defaultValue : process.env[key];
-
 }
 
 const envArray = (key) => env(key, "").split(",");
@@ -32,3 +30,4 @@ module.exports = {
     },
   },
 };
+

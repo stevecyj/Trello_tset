@@ -1,4 +1,4 @@
-const _ = require("lodash");
+import _ from "lodash";
 
 /**
  * Map created card with date
@@ -7,15 +7,162 @@ const _ = require("lodash");
  * @param {array} actions
  * @returns {array}
  */
+
+type Card ={
+  updatedListName?: string,
+  id: string,
+  address: string,
+  badges: {
+    attachmentsByType: [Object],
+    location: boolean,
+    votes: number,
+    viewingMemberVoted: boolean,
+    subscribed: boolean,
+    fogbugz: string,
+    checkItems: number,
+    checkItemsChecked: number,
+    checkItemsEarliestDue: null,
+    comments: number,
+    attachments: number,
+    description: true,
+    due: null,
+    dueComplete: boolean,
+    start: null
+  },
+  checkItemStates: null,
+  closed: boolean,
+  coordinates: null,
+  creationMethod: null,
+  dueComplete: boolean,
+  dateLastActivity: string,
+  desc: string,
+  descData: { emoji: {} },
+  due: null,
+  dueReminder: null,
+  email: null,
+  idBoard: string,
+  idChecklists: [],
+  idLabels: [],
+  idList: string,
+  idMembers: [],
+  idMembersVoted: [],
+  idShort: number,
+  idAttachmentCover: null,
+  labels: {
+    id: string,
+    idBoard: string,
+    name: string,
+    color: string
+  }[],
+  limits: { attachments: [Object], checklists: [Object], stickers: [Object] },
+  locationName: null,
+  manualCoverAttachment: boolean,
+  name: string,
+  pos: number,
+  shortLink: string,
+  shortUrl: string,
+  staticMapUrl: null,
+  start: null,
+  subscribed: boolean,
+  url: string,
+  cover: {
+    idAttachment: null,
+    color: null,
+    idUploadedBackground: null,
+    size: string,
+    brightness: string,
+    idPlugin: null
+  },
+  isTemplate: boolean,
+  cardRole: null,
+  attachments: [],
+  createdDate: string
+}
+
+type Action = {
+  id: string,
+  idMemberCreator: string,
+  data: {
+    card: {
+      desc: string,
+      id: string,
+      name: string,
+      idShort: number,
+      shortLink: string
+    },
+    old: {
+      desc:string
+    },
+    board: {
+      id: string,
+      name: string,
+      shortLink: string
+    },
+    list: {
+      id: string,
+      name: string
+    }
+  },
+  appCreator: string,
+  type: string,
+  date: string,
+  limits: string,
+  memberCreator: {
+    id: string,
+    activityBlocked: boolean,
+    avatarHash: string,
+    avatarUrl: string,
+    fullName: string,
+    idMemberReferrer: string,
+    initials: string,
+    nonPublic: {
+      
+    },
+    nonPublicAvailable: boolean,
+    username: string
+  }
+}
+
+type List = {
+  id: string,
+  name: string,
+  closed: boolean,
+  idBoard: string,
+  pos: number,
+  subscribed: boolean,
+  softLimit: string,
+  limits: {
+    cards: {
+      openPerList: {
+        status: string,
+        disableAt: number,
+        warnAt: number
+      },
+      totalPerList: {
+        status: string,
+        disableAt: number,
+        warnAt: number
+      }
+    }
+  },
+  creationMethod: string
+}
+
+type GroupedCard = {
+  [x:string]: Card[]
+}
+
 class CardService {
-  appendDetailInfo(cards, actions, lists) {
+  
+  appendDetailInfo(cards: Card[], actions: Action[], lists: List[]) {
     let updatedCards = this.appendCreatedDate(cards, actions);
 
     updatedCards = this.appendListName(updatedCards, lists);
+    
     return updatedCards;
   }
 
-  appendCreatedDate(cards, actions) {
+  appendCreatedDate(cards: Card[], actions: Action[]) {
     return cards.map((card) => {
       const action = actions.find(
         (action) =>
@@ -29,7 +176,7 @@ class CardService {
     });
   }
 
-  appendListName(updatedCards, lists) {
+  appendListName(updatedCards: Card[], lists: List[]) {
     return updatedCards.map((card) => {
       const matched = lists.find((list) => card.idList == list.id);
 
@@ -40,7 +187,7 @@ class CardService {
     });
   }
 
-  filterByStatus(updatedCards, status) {
+  filterByStatus(updatedCards: Card[], status: string) {
     const objStatus = {
       Info: ["General Info", "Template"],
       Todo: ["Todo"],
@@ -59,7 +206,7 @@ class CardService {
     return updatedCards;
   }
 
-  filterByDateRange(updatedCards, fromDate, toDate) {
+  filterByDateRange(updatedCards: Card[], fromDate: string, toDate: string) {
     if (fromDate) {
       updatedCards = updatedCards.filter(
         (card) => card.createdDate >= fromDate
@@ -72,7 +219,7 @@ class CardService {
     return updatedCards;
   }
 
-  filterByLabel(updatedCards, label) {
+  filterByLabel(updatedCards: Card[], label: string) {
     if (label) {
       updatedCards = updatedCards.filter((card) => {
         const cardLabels = card.labels;
@@ -87,13 +234,13 @@ class CardService {
     return updatedCards;
   }
 
-  groupCards(updatedCards) {
+  groupCards(updatedCards: Card[]) {
     let groupedCardMap = _.groupBy(updatedCards, "updatedListName");
 
     //Group by month of card created
     for (let cardStatus in groupedCardMap) {
       const cards = groupedCardMap[cardStatus];
-      groupedCardMap[cardStatus] = this.groupByMonth(cards, cardStatus);
+      groupedCardMap[cardStatus] = this.groupByMonth(cards);
     }
 
     let labelNames = this.extractAllLabelNames(groupedCardMap);
@@ -114,14 +261,14 @@ class CardService {
     return groupedCardMap;
   }
 
-  groupByMonth(cards) {
+  groupByMonth(cards: Card[]) {
     return _.groupBy(cards, (card) => {
       const createdDate = new Date(card.createdDate);
       return createdDate.toLocaleString("default", { month: "long" });
     });
   }
 
-  extractAllLabelNames(groupedCardMap) {
+  extractAllLabelNames(groupedCardMap: GroupedCard) {
     let labelNames = [];
     for (let cardStatus in groupedCardMap) {
       for (let cardMonth in groupedCardMap[cardStatus]) {
@@ -142,10 +289,10 @@ class CardService {
   }
 
   getMonthlyLabelCardNumbersMap(
-    groupedCardMap,
-    cardStatus,
-    cardMonth,
-    labelNames
+    groupedCardMap: GroupedCard,
+    cardStatus: string,
+    cardMonth: string,
+    labelNames: string[]
   ) {
     let monthlyCards = groupedCardMap[cardStatus][cardMonth]; //array of cards under certain month
     let labelCardNumbersMap = {
@@ -183,7 +330,9 @@ class CardService {
   }
 }
 
-module.exports = {
+const cardService = new CardService();
+
+export {
   CardService,
-  cardService: new CardService(),
-};
+  cardService,
+}

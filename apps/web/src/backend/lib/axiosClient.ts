@@ -1,5 +1,5 @@
-const axios = require("axios");
-const debug = require('debug');
+import axios from "axios";
+import debug from 'debug';
 const debugLog = debug('trello:axios');
 const errorLog = debug('trello:axios:error');
 
@@ -20,4 +20,4 @@ class AxiosClient {
   }
 }
 
-module.exports = new AxiosClient();
+export default new AxiosClient();

@@ -1,14 +1,12 @@
-import { prisma } from "database";
-
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { trelloAdapter } from '../../../backend/adapters/trelloAdapter';
 import { cardService } from '../../../backend/services/cardService';
 
 /**
- * Users
+ * Monthly report
  *
- * @description A basic API endpoint to retrieve all the users in the database
+ * @description To display number of cards created in a month (with filter and group)
  */
 export default async function handler(
   req: NextApiRequest,
@@ -19,17 +17,32 @@ export default async function handler(
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  const { from, to, status, label } = req.query;
+  const generateReport = async() =>{
+    const { from, to, status, label } = req.query;
+    
+    const board = await trelloAdapter.getBoard();
+
+    const { cards, actions, lists } = board;
+
+    let updatedCards = cardService.appendDetailInfo(cards, actions, lists);
+
+    updatedCards = filterCards(updatedCards, status, label, from, to);
+
+    let groupedCardMap = cardService.groupCards(updatedCards);
+
+    res.json(groupedCardMap);
+  }
+
+  const filterCards = (updatedCards, status, label, from, to) =>{
+    updatedCards = cardService.filterByStatus(updatedCards, status);
+
+    updatedCards = cardService.filterByLabel(updatedCards, label);
+
+    updatedCards = cardService.filterByDateRange(updatedCards, from, to);
+
+    return updatedCards;
+  }
+    
+  await generateReport();
   
-  const board = await trelloAdapter.getBoard();
-
-  const { cards, actions, lists } = board;
-
-  let updatedCards = cardService.appendDetailInfo(cards, actions, lists);
-
-  updatedCards = this.filterCards(updatedCards, status, label, from, to);
-
-  let groupedCardMap = cardService.groupCards(updatedCards);
-
-  res.json(groupedCardMap);
 }

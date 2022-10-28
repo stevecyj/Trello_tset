@@ -16,7 +16,9 @@
     "dev": "turbo run dev --parallel",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "generate": "turbo run generate",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "test": "jest",
+    "test:watch": "jest --watch --notify"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

@@ -7,7 +7,7 @@ class TrelloAdaptor {
   key: string;
   token:string;
   boardId : string;
-  client : any;
+  client : typeof axiosClient;
   
   constructor(options, client) {
     

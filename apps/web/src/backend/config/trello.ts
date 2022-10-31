@@ -1,12 +1,14 @@
-require("dotenv").config();
+import dotenv from "dotenv";
 
-const env = (key, defaultValue) => {
+dotenv.config();
+
+const env = (key: string, defaultValue: string = "") => {
   return typeof process.env[key] === "undefined" ? defaultValue : process.env[key];
 }
 
-const envArray = (key) => env(key, "").split(",");
+const envArray = (key:string) => env(key, "").split(",");
 
-module.exports = {
+export default {
   key: env("TRELLO_KEY"),
   token: env("TRELLO_TOKEN"),
   boardId: env("TRELLO_BOARD_ID"),

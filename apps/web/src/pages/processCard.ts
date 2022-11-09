@@ -1,116 +1,50 @@
-/* const fetchData = async () =>{
-  const res = await fetch('/api/reports/chart');
-  const restructredCard = await res.json();
-  //let newCard = cardService.restructureCardForChart(restructredCard);
-  return (
-    restructredCard
-  );
-} */
 import axios from 'axios'
-import { useEffect, useState } from 'react'
 
-/* const Result = () =>{
-  const [data, setData] = useState({})
-
-  const fetchData = () =>{
-  
-    //const response = await axios.get('http://localhost:3000/api/reports/chart');
-    //return response
-    axios.get('http://localhost:3000/api/reports/chart',{})
-    .then(res => {
-      setData(res.data)
-      console.log(data)
-      return res.data
-    })
-    .catch (error => {
-      console.log(error);
-    });
-  }
-  
-  useEffect(() => {
-    fetchData();
-  }, [])
-
-  return(
-    data
-  );
-} */
-
-const fetchData = async() =>{
-
-  const [data, setData] = useState({})
-  
-  /* const response = await axios.get('http://localhost:3000/api/reports/chart');
-  return response.data */
-  axios.get('http://localhost:3000/api/reports/chart')
+const fetchData = () =>{
+    
+  return axios.get('http://localhost:3000/api/reports/chart')
   .then(res => {
-    console.log(res.data)
-    setData(res.data)
-    //return res.data
+    const chartData = res.data
+
+    let final_card_for_chart = [
+      {month:'January'},
+      {month:'February'},
+      {month:'March'},
+      {month:'April'},
+      {month:'May'},
+      {month:'June'},
+      {month:'July'},
+      {month:'August'},
+      {month:'September'},
+      {month:'October'},
+      {month:'November'},
+      {month:'December'}
+    ]
+
+    for (let card_status in chartData){
+      for (let month in chartData[card_status]){
+          //Find index of month, to use it later when storing number of card with certain label
+          let index_of_month = final_card_for_chart.map(card => card.month).indexOf(month)
+          let label_number_map = chartData[card_status][month]
+
+          for (let each_card in label_number_map){
+              let card = final_card_for_chart[index_of_month]
+
+              if (each_card in final_card_for_chart[index_of_month]){
+                  card[each_card]++
+              }
+              else{ //if not in, create new and append
+                  card[each_card] = label_number_map[each_card]
+              }
+          }
+      }
+    }
+    
+    return final_card_for_chart
   })
   .catch (error => {
     console.log(error);
   });
-
-  return(
-    data
-  );
 }
-
 
 export default fetchData
-//export default Result
-
-/* const [data, setData] = useState(0)
-
-const fetchData = () =>{
-  fetch('/api/reports/chart')
-  .then(res => res.json())
-  .then(card =>{
-    //console.log('start card then')
-    setData(data)
-    return card
-  })
-} 
-
-useEffect( () => {
-  fetchData();
-}, [setData]) */
-
-//export default data
-  
-/* console.log("#####",card)
-export default card */
-
-/*import { useEffect, useState } from "react";
-
- const processCard = () =>{
-
-  //GET CHART DATA
-  const [chart_data, setChartData] = useState(null);
-
-  const fetchData = () =>{
-    fetch('/api/reports/chart')
-    .then(res => {return res.json();})
-    .then(fetchresult => {
-      console.log(JSON.stringify(fetchresult))
-      setChartData(JSON.stringify(fetchresult))
-      return fetchresult
-    })
-    .catch(err => console.log(err))
-  }
-
-  let data = fetchData()
-  console.log(data)
-  
-  useEffect(() => {
-    fetchData();
-  },[])
-
-  return(
-    "hi"
-  );
-
-}
-
-export default processCard */

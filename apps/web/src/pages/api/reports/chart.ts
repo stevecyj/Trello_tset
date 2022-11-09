@@ -30,11 +30,9 @@ export default async function handler(
 
     let groupedCardMap = cardService.groupCards(updatedCards);
 
-    let restructuredCard = cardService.restructureCardForChart(groupedCardMap);
-
-    //return groupedCardMap;
     return res.status(200).json(
-        restructuredCard
+        //restructuredCard
+        groupedCardMap
       );
   }
 

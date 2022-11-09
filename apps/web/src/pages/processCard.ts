@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const fetchData = () =>{
+const fetchData = (url) =>{
     
-  return axios.get('http://localhost:3000/api/reports/chart')
+  return axios.get(url)
   .then(res => {
     const chartData = res.data
 

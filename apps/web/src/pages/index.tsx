@@ -14,14 +14,14 @@ import Result from './processCard'
 import { useState, useEffect } from 'react';
 
 const Root = props => (
-  <Legend.Root {...props} sx={{ display: 'flex', margin: 'auto', flexDirection: 'row' }} />
+  <Legend.Root {...props} sx={{ display: 'block', margin: 'auto' }} />
 );
 const Label = props => (
   <Legend.Label {...props} sx={{ whiteSpace: 'nowrap' }} />
 );
 
 const IndexPage = () =>{
-  const [data, setData] = useState(null)
+  const [carddata, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   
   const fetchData = () =>{
@@ -35,12 +35,10 @@ const IndexPage = () =>{
     return (
       <Paper>
         <Chart
-          data={data}
+          data={carddata}
         >
-          <ArgumentAxis />
-          <ValueAxis
-            max={2400}
-          />
+          <ArgumentAxis/>
+          <ValueAxis/>
   
         <BarSeries
             name="Feature"//name in the series of stack
@@ -192,7 +190,7 @@ const IndexPage = () =>{
           argumentField="month" 
         />
           <Animation />
-          <Legend position="bottom" rootComponent={Root} labelComponent={Label} />
+          <Legend position="right" rootComponent={Root} labelComponent={Label}/>
           <Title text="Monthly Created Card - Group by Label" />
           <Stack
             stacks={[
@@ -221,5 +219,6 @@ const IndexPage = () =>{
         {loading ? returnLoading() : returnChart()}
     </div>
   )
+
 }
 export default IndexPage

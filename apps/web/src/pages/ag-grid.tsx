@@ -1,5 +1,7 @@
 import { AgChartsReact } from 'ag-charts-react';
 import { useState, useEffect } from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import Result from './processCard'
 
 type final_card = {
@@ -10,6 +12,11 @@ const AgGrid = () =>{
   const [loading, setLoading] = useState(true)
 
   const [options, setOption] = useState(null)
+
+  const [status, setStatus] = useState('')
+  const [label, setLabel] = useState('')
+  const [from, setFrom] = useState('')
+  const [to, setTo] = useState('')
 
   let defaulturl = 'http://localhost:3000/api/reports/chart'
 
@@ -253,7 +260,32 @@ const AgGrid = () =>{
       return(
         <div>Loading...</div>
       )
+ }
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    let url_with_filter = defaulturl
+    if(status){
+      url_with_filter += "?status="+status
     }
+    if(label){
+      url_with_filter += "?label="+label
+    }
+    if(from){
+      url_with_filter += "?from="+from
+    }
+    if(label){
+      url_with_filter += "?to="+to
+    }
+
+    fetchData(url_with_filter)
+  }
+
+  const fetchAll = (e) =>{
+    e.preventDefault();
+    defaulturl = 'http://localhost:3000/api/reports/chart';
+    fetchData(defaulturl)
+  }
 
     useEffect( () => {
       fetchData(defaulturl);
@@ -261,8 +293,48 @@ const AgGrid = () =>{
 
   return (
     <div>
+      <div id="UserInput">
+        <form onSubmit={handleSubmit}>
+          <TextField
+          label="Status"
+          variant="filled"
+          sx={{ mb: 2 }}
+          value={status}
+          onChange={e => setStatus(e.target.value)}
+          /><br />
+
+          <TextField
+            label="Label"
+            variant="filled"
+            sx={{ mb: 2 }}
+            value={label}
+            onChange={e => setLabel(e.target.value)}
+          /><br />
+
+          <TextField
+            label="From"
+            variant="filled"
+            type='date'
+            sx={{ mb: 2 }}
+            value={from}
+            onChange={e => setFrom(e.target.value)}
+          /><br />
+
+          <TextField
+            label="To"
+            variant="filled"
+            type='date'
+            sx={{ mb: 2 }}
+            value={to}
+            onChange={e => setTo(e.target.value)}
+          /><br />
+
+          <Button variant='outlined' color='success' type='submit'>Filter Data</Button>
+          <Button variant='contained' color='success' onClick={fetchAll} sx={{ ml: 2 }}>Fetch All</Button>
+        </form>
+      </div>
       <div id="Container">
-        {loading ? returnLoading() : returnChart()}
+          {loading ? returnLoading() : returnChart()}
       </div>
     </div>
   )

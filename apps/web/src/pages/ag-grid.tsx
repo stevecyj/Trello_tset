@@ -249,6 +249,9 @@ const AgGrid = () =>{
           position: 'bottom',
         },
       ],
+      legend: {
+        position: 'bottom',
+      },
     })
   }
 

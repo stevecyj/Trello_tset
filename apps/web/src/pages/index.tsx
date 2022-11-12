@@ -211,18 +211,18 @@ const IndexPage = () =>{
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    let url_with_filter = defaulturl
+    let url_with_filter = defaulturl + "?"
     if(status){
-      url_with_filter += "?status="+status
+      url_with_filter += "status="+status+"&"
     }
     if(label){
-      url_with_filter += "?label="+label
+      url_with_filter += "label="+label+"&"
     }
     if(from){
-      url_with_filter += "?from="+from
+      url_with_filter += "from="+from+"&"
     }
-    if(label){
-      url_with_filter += "?to="+to
+    if(to){
+      url_with_filter += "to="+to
     }
 
     fetchData(url_with_filter)

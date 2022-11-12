@@ -3,14 +3,18 @@ import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Result from './processCard'
+import useData from './useFetchData'
+import {getData} from '../data/ag-grid-data'
 
 type final_card = {
   [key:string] : string | number
 }
 
 const AgGrid = () =>{
-  const [loading, setLoading] = useState(true)
+  let defaulturl = 'http://localhost:3000/api/reports/chart'
 
+  const {loading , cards, fetchData} = useData(defaulturl)
+  
   const [options, setOption] = useState(null)
 
   const [status, setStatus] = useState('')
@@ -18,17 +22,7 @@ const AgGrid = () =>{
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
 
-  let defaulturl = 'http://localhost:3000/api/reports/chart'
-
-  const fetchData = (url_to_fetch : string) =>{
-      setLoading(true);
-      Result(url_to_fetch).then((cardResult) =>{
-        setDataForChart(cardResult);
-        setLoading(false);
-      })
-  }
-
-  const setDataForChart =(card : void | final_card[]) => {
+  const setDataForChart =() => {
     setOption({
       title: {
         text: "Monthly Created Card",
@@ -36,7 +30,7 @@ const AgGrid = () =>{
       subtitle: {
         text: 'Group by Label',
       },
-      data: card,
+      data: cards,
       series: [
         {
           type: 'column',
@@ -265,6 +259,10 @@ const AgGrid = () =>{
       )
  }
 
+  useEffect(() => {
+    setDataForChart()
+  },[cards])
+
   const handleSubmit = (e) =>{
     e.preventDefault();
     let url_with_filter = defaulturl
@@ -289,10 +287,6 @@ const AgGrid = () =>{
     defaulturl = 'http://localhost:3000/api/reports/chart';
     fetchData(defaulturl)
   }
-
-    useEffect( () => {
-      fetchData(defaulturl);
-  }, [])
 
   return (
     <div>

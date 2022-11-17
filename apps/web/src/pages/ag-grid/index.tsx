@@ -2,7 +2,7 @@ import { AgChartsReact } from 'ag-charts-react';
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import useData from './useFetchData'
+import useData from '../useFetchData'
 
 type final_card = {
   [key:string] : string | number
@@ -334,4 +334,5 @@ const AgGrid = () =>{
     </div>
   )
 }
+
 export default AgGrid

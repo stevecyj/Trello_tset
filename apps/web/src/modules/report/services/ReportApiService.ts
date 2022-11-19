@@ -9,8 +9,9 @@ class ReportApiService {
     const card = getCards.data;
 
     const reportData = monthlyCreatedTasksGroupByLabelTransformer.transform(card);
+    const labels = monthlyCreatedTasksGroupByLabelTransformer.getLabels(card);
 
-    return reportData;
+    return { reportData, labels };
   }
 }
 

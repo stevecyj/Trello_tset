@@ -5,21 +5,21 @@ import Button from '@mui/material/Button';
 import { useRouter } from "next/router"
 import { reportApiService } from '../services/ReportApiService';
 
-type final_card = {
-  [key:string] : string | number
-}
-
 export const getServerSideProps = async(context) =>{
-  const result = await reportApiService.getChart(context.query);
+  const {
+    reportData: result,
+    labels
+  } = await reportApiService.getChart(context.query);
 
   return{
     props:{
-      result
+      result,
+      labels
     }
   }
 }
 
-export const MyReport = ({result}) =>{
+export const MyReport = ({ result, labels }) =>{
 
   const [loading, setLoading] = useState(true)
   const [options, setOption] = useState(null)
@@ -36,6 +36,17 @@ export const MyReport = ({result}) =>{
   },[result])
 
   const setDataForChart = (result) => {
+    const series = labels.map((label) => {
+      return {
+        type: 'column',
+        xKey: 'month',
+        yKey: label,
+        yName: label,
+        //normalizedTo: 100,
+        stacked: true,
+      };
+    });
+
     setOption({
       title: {
         text: "Monthly Created Card",
@@ -44,208 +55,7 @@ export const MyReport = ({result}) =>{
         text: 'Group by Label',
       },
       data: result,
-      series: [
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Feature',
-          yName: 'Feature',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: '作業',
-          yName: '作業',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Productivity',
-          yName: 'Productivity',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'VS Code',
-          yName: 'VS Code',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Video',
-          yName: 'Video',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Linux',
-          yName: 'Linux',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Reading',
-          yName: 'Reading',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Doc',
-          yName: 'Doc',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Done',
-          yName: 'Done',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Trello',
-          yName: 'Trello',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Project Management',
-          yName: 'Project Management',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Class',
-          yName: 'Class',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: '自學',
-          yName: '自學',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Interview',
-          yName: 'Interview',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Testing',
-          yName: 'Testing',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'CI/CD',
-          yName: 'CI/CD',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'IDE',
-          yName: 'IDE',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Github',
-          yName: 'Github',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'HackMD',
-          yName: 'HackMD',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Git',
-          yName: 'Git',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Semantic Versioning',
-          yName: 'Semantic Versioning',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Markdown',
-          yName: 'Markdown',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'SSH',
-          yName: 'SSH',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'Meeting',
-          yName: 'Meeting',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-        {
-          type: 'column',
-          xKey: 'month',
-          yKey: 'No Label',
-          yName: 'No Label',
-          //normalizedTo: 100,
-          stacked: true,
-        },
-      ],
+      series,
       axes: [
         {
           type: 'number',

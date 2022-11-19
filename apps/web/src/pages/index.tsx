@@ -1,8 +1,14 @@
-export default function IndexPage() {
-  return (
-    <div>
-      <h1>Hello World</h1>
-      <a href="/api/users">View Users</a>
-    </div>
-  );
+const IndexPage = () =>{
+    return(
+        <div>
+            <h2>
+                Generate Chart - Trello Cards
+            </h2>
+            <h3><a href="./devexpress-reactive">DevExpress Reactive</a></h3>
+            <h3><a href="./ag-grid">AgGrid</a></h3>
+        </div>
+        
+    )
 }
+
+export default IndexPage

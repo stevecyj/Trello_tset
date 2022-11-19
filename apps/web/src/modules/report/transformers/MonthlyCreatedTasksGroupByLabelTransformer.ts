@@ -5,7 +5,7 @@ class MonthlyCreatedTasksGroupByLabelTransformer {
     return this.processCard(raw);
   }
 
-  private getLabels(raw): string[] {
+  public getLabels(raw): string[] {
     const level1 = _.transform(raw, function(result, value, key) {
       _.merge(result, value);
     }, {});

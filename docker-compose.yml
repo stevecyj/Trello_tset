@@ -9,7 +9,6 @@ services:
     platform: linux/amd64
     image: mysql:8.0.28
     container_name: trello_analysis_mysql
-    restart: always
     ports:
       - 3306:3306
     environment:

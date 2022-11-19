@@ -1,35 +1,38 @@
 import { AgChartsReact } from 'ag-charts-react';
 import { useState, useEffect } from 'react';
-import {GetCards} from '../../report/services/ReportApiService'
 
-type final_card = {
-  [key:string] : string | number
-}
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { useRouter } from "next/router"
 
-export const MonthlyCreatedTasksGroupByLabel = () =>{
+export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) =>{
+
   const [loading, setLoading] = useState(true)
-
   const [options, setOption] = useState(null)
 
-  let defaulturl = 'http://localhost:3000/api/reports/chart'
+  const [status, setStatus] = useState('')
+  const [label, setLabel] = useState('')
+  const [from, setFrom] = useState('')
+  const [to, setTo] = useState('')
 
-  const fetchData = async(url_to_fetch : string) =>{
-      setLoading(true);
-      const {reportData, labels} = await GetCards(url_to_fetch)
-      setDataForChart(reportData, labels)
-  }
+  const router = useRouter()
 
-  const setDataForChart =(card: final_card[], labels: String[]) => {
+  useEffect(() =>{
+    setDataForChart(result);
+  },[result])
+
+  const setDataForChart = (result) => {
     const series = labels.map((label) => {
       return {
         type: 'column',
         xKey: 'month',
         yKey: label,
         yName: label,
+        //normalizedTo: 100,
         stacked: true,
       };
     });
-    
+
     setOption({
       title: {
         text: "Monthly Created Card",
@@ -37,7 +40,7 @@ export const MonthlyCreatedTasksGroupByLabel = () =>{
       subtitle: {
         text: 'Group by Label',
       },
-      data: card,
+      data: result,
       series,
       axes: [
         {
@@ -49,23 +52,22 @@ export const MonthlyCreatedTasksGroupByLabel = () =>{
           position: 'bottom',
         },
       ],
+      legend: {
+        position: 'bottom',
+      },
     })
 
     setLoading(false)
   }
-  
-    useEffect( () => {
-      fetchData(defaulturl);
-  }, [])
 
-  return (
+  return(
     <div>
       <div id="Container">
-        {loading ? (
-          <div>Loading...</div>
-        ):(
-          <AgChartsReact options={options} />
-        )}
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <AgChartsReact options={options} />
+          )}
       </div>
     </div>
   )

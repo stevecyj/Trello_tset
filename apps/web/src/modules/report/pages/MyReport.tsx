@@ -1,9 +1,9 @@
-import { AgChartsReact } from 'ag-charts-react';
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useRouter } from "next/router"
 import { reportApiService } from '../services/ReportApiService';
+import { MonthlyCreatedTasksGroupByLabel } from '../../chart-templates/components/MonthlyCreatedTasksGroupByLabel';
 
 export const getServerSideProps = async(context) =>{
   const {
@@ -20,69 +20,12 @@ export const getServerSideProps = async(context) =>{
 }
 
 export const MyReport = ({ result, labels }) =>{
-
-  const [loading, setLoading] = useState(true)
-  const [options, setOption] = useState(null)
-
   const [status, setStatus] = useState('')
   const [label, setLabel] = useState('')
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
 
   const router = useRouter()
-
-  useEffect(() =>{
-    setDataForChart(result);
-  },[result])
-
-  const setDataForChart = (result) => {
-    const series = labels.map((label) => {
-      return {
-        type: 'column',
-        xKey: 'month',
-        yKey: label,
-        yName: label,
-        //normalizedTo: 100,
-        stacked: true,
-      };
-    });
-
-    setOption({
-      title: {
-        text: "Monthly Created Card",
-      },
-      subtitle: {
-        text: 'Group by Label',
-      },
-      data: result,
-      series,
-      axes: [
-        {
-          type: 'number',
-          position: 'left',
-        },
-        {
-          type: 'category',
-          position: 'bottom',
-        },
-      ],
-      legend: {
-        position: 'bottom',
-      },
-    })
-
-    setLoading(false)
-  }
-
-  const returnLoading = () => {
-    return(
-      <div>Loading...</div>
-    )
-  }
-
-  const returnChart = () =>{
-    return <AgChartsReact options={options} />
-  }
 
   const handleSubmit = (e) =>{
     e.preventDefault();
@@ -162,9 +105,7 @@ export const MyReport = ({ result, labels }) =>{
           <Button variant='contained' color='success' onClick={fetchAll} sx={{ ml: 2 }}>Fetch All</Button>
         </form>
       </div>
-      <div id="Container">
-          {loading ? returnLoading() : returnChart()}
-      </div>
+      <MonthlyCreatedTasksGroupByLabel result={result} labels={labels} />
     </div>
   )
 }

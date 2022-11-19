@@ -1,13 +1,14 @@
 import axios from 'axios'
-import { monthlyCreatedTasksGroupByLabelTransformer } from '../transformers/MonthlyCreatedTasksGroupByLabelTransformer'
+class ReportApiService {
+  async getChart(query: any) {
+    const params = new URLSearchParams(query)
+    const url = 'http://localhost:3000/api/reports/chart?'+params
+    const getCards = await axios.get(url)
+    const card = getCards.data
 
-export const GetCards = (url) =>{
-  return axios.get(url)
-  .then(res =>{
-
-    const reportData = monthlyCreatedTasksGroupByLabelTransformer.transform(res.data)
-    const labels = monthlyCreatedTasksGroupByLabelTransformer.getLabels(res.data)
-
-    return {reportData,labels}
-  })
+    return card;
+  }
 }
+
+
+export const reportApiService = new ReportApiService();

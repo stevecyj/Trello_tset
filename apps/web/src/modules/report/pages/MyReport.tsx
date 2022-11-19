@@ -2,18 +2,15 @@ import { AgChartsReact } from 'ag-charts-react';
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import axios from 'axios'
 import { useRouter } from "next/router"
+import { reportApiService } from '../services/ReportApiService';
 
 type final_card = {
   [key:string] : string | number
 }
 
 export const getServerSideProps = async(context) =>{
-  const params = new URLSearchParams(context.query)
-  const url = 'http://localhost:3000/api/reports/chart?'+params
-  const getCards = await axios.get(url)
-  const card = getCards.data
+  const card = await reportApiService.getChart(context.query);
 
   return{
     props:{

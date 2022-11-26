@@ -4,7 +4,7 @@ import { NavigationMenu } from '../modules/chart-templates/components/Navigation
 export const IndexPage = () => {
   return (
     <div>
-      <NavigationMenu></NavigationMenu>
+      <NavigationMenu />
       <ChartCards></ChartCards>
     </div>
   );

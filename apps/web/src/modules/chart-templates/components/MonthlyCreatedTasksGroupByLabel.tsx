@@ -3,26 +3,25 @@ import { useState, useEffect } from 'react';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useRouter } from "next/router"
+import { useRouter } from 'next/router';
 
-export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) =>{
+export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) => {
+  const [loading, setLoading] = useState(true);
+  const [options, setOption] = useState(null);
 
-  const [loading, setLoading] = useState(true)
-  const [options, setOption] = useState(null)
+  const [status, setStatus] = useState('');
+  const [label, setLabel] = useState('');
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
 
-  const [status, setStatus] = useState('')
-  const [label, setLabel] = useState('')
-  const [from, setFrom] = useState('')
-  const [to, setTo] = useState('')
+  const router = useRouter();
 
-  const router = useRouter()
-
-  useEffect(() =>{
+  useEffect(() => {
     setDataForChart(result);
-  },[result])
+  }, [result]);
 
-  const setDataForChart = (result) => {
-    const series = labels.map((label) => {
+  const setDataForChart = result => {
+    const series = labels.map(label => {
       return {
         type: 'column',
         xKey: 'month',
@@ -35,7 +34,7 @@ export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) =>{
 
     setOption({
       title: {
-        text: "Monthly Created Card",
+        text: 'Monthly Created Card',
       },
       subtitle: {
         text: 'Group by Label',
@@ -55,20 +54,16 @@ export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) =>{
       legend: {
         position: 'bottom',
       },
-    })
+    });
 
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
-  return(
+  return (
     <div>
       <div id="Container">
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <AgChartsReact options={options} />
-          )}
+        {loading ? <div>Loading...</div> : <AgChartsReact options={options} />}
       </div>
     </div>
-  )
-}
+  );
+};

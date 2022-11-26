@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 /**
  * Map created card with date
@@ -8,166 +8,163 @@ import _ from "lodash";
  * @returns {array}
  */
 
-type Card ={
-  updatedListName?: string,
-  id: string,
-  address: string,
+type Card = {
+  updatedListName?: string;
+  id: string;
+  address: string;
   badges: {
-    attachmentsByType: [Object],
-    location: boolean,
-    votes: number,
-    viewingMemberVoted: boolean,
-    subscribed: boolean,
-    fogbugz: string,
-    checkItems: number,
-    checkItemsChecked: number,
-    checkItemsEarliestDue: null,
-    comments: number,
-    attachments: number,
-    description: true,
-    due: null,
-    dueComplete: boolean,
-    start: null
-  },
-  checkItemStates: null,
-  closed: boolean,
-  coordinates: null,
-  creationMethod: null,
-  dueComplete: boolean,
-  dateLastActivity: string,
-  desc: string,
-  descData: { emoji: {} },
-  due: null,
-  dueReminder: null,
-  email: null,
-  idBoard: string,
-  idChecklists: [],
-  idLabels: [],
-  idList: string,
-  idMembers: [],
-  idMembersVoted: [],
-  idShort: number,
-  idAttachmentCover: null,
+    attachmentsByType: [Object];
+    location: boolean;
+    votes: number;
+    viewingMemberVoted: boolean;
+    subscribed: boolean;
+    fogbugz: string;
+    checkItems: number;
+    checkItemsChecked: number;
+    checkItemsEarliestDue: null;
+    comments: number;
+    attachments: number;
+    description: true;
+    due: null;
+    dueComplete: boolean;
+    start: null;
+  };
+  checkItemStates: null;
+  closed: boolean;
+  coordinates: null;
+  creationMethod: null;
+  dueComplete: boolean;
+  dateLastActivity: string;
+  desc: string;
+  descData: { emoji: {} };
+  due: null;
+  dueReminder: null;
+  email: null;
+  idBoard: string;
+  idChecklists: [];
+  idLabels: [];
+  idList: string;
+  idMembers: [];
+  idMembersVoted: [];
+  idShort: number;
+  idAttachmentCover: null;
   labels: {
-    id: string,
-    idBoard: string,
-    name: string,
-    color: string
-  }[],
-  limits: { attachments: [Object], checklists: [Object], stickers: [Object] },
-  locationName: null,
-  manualCoverAttachment: boolean,
-  name: string,
-  pos: number,
-  shortLink: string,
-  shortUrl: string,
-  staticMapUrl: null,
-  start: null,
-  subscribed: boolean,
-  url: string,
+    id: string;
+    idBoard: string;
+    name: string;
+    color: string;
+  }[];
+  limits: { attachments: [Object]; checklists: [Object]; stickers: [Object] };
+  locationName: null;
+  manualCoverAttachment: boolean;
+  name: string;
+  pos: number;
+  shortLink: string;
+  shortUrl: string;
+  staticMapUrl: null;
+  start: null;
+  subscribed: boolean;
+  url: string;
   cover: {
-    idAttachment: null,
-    color: null,
-    idUploadedBackground: null,
-    size: string,
-    brightness: string,
-    idPlugin: null
-  },
-  isTemplate: boolean,
-  cardRole: null,
-  attachments: [],
-  createdDate: string
-}
+    idAttachment: null;
+    color: null;
+    idUploadedBackground: null;
+    size: string;
+    brightness: string;
+    idPlugin: null;
+  };
+  isTemplate: boolean;
+  cardRole: null;
+  attachments: [];
+  createdDate: string;
+};
 
 type Action = {
-  id: string,
-  idMemberCreator: string,
+  id: string;
+  idMemberCreator: string;
   data: {
     card: {
-      desc: string,
-      id: string,
-      name: string,
-      idShort: number,
-      shortLink: string
-    },
+      desc: string;
+      id: string;
+      name: string;
+      idShort: number;
+      shortLink: string;
+    };
     old: {
-      desc:string
-    },
+      desc: string;
+    };
     board: {
-      id: string,
-      name: string,
-      shortLink: string
-    },
+      id: string;
+      name: string;
+      shortLink: string;
+    };
     list: {
-      id: string,
-      name: string
-    }
-  },
-  appCreator: string,
-  type: string,
-  date: string,
-  limits: string,
+      id: string;
+      name: string;
+    };
+  };
+  appCreator: string;
+  type: string;
+  date: string;
+  limits: string;
   memberCreator: {
-    id: string,
-    activityBlocked: boolean,
-    avatarHash: string,
-    avatarUrl: string,
-    fullName: string,
-    idMemberReferrer: string,
-    initials: string,
-    nonPublic: {
-      
-    },
-    nonPublicAvailable: boolean,
-    username: string
-  }
-}
+    id: string;
+    activityBlocked: boolean;
+    avatarHash: string;
+    avatarUrl: string;
+    fullName: string;
+    idMemberReferrer: string;
+    initials: string;
+    nonPublic: {};
+    nonPublicAvailable: boolean;
+    username: string;
+  };
+};
 
 type List = {
-  id: string,
-  name: string,
-  closed: boolean,
-  idBoard: string,
-  pos: number,
-  subscribed: boolean,
-  softLimit: string,
+  id: string;
+  name: string;
+  closed: boolean;
+  idBoard: string;
+  pos: number;
+  subscribed: boolean;
+  softLimit: string;
   limits: {
     cards: {
       openPerList: {
-        status: string,
-        disableAt: number,
-        warnAt: number
-      },
+        status: string;
+        disableAt: number;
+        warnAt: number;
+      };
       totalPerList: {
-        status: string,
-        disableAt: number,
-        warnAt: number
-      }
-    }
-  },
-  creationMethod: string
-}
+        status: string;
+        disableAt: number;
+        warnAt: number;
+      };
+    };
+  };
+  creationMethod: string;
+};
 
 type GroupedCard = {
-  [x:string]: Card[]
-}
+  [x: string]: Card[];
+};
 
 class CardService {
-  
   appendDetailInfo(cards: Card[], actions: Action[], lists: List[]) {
     let updatedCards = this.appendCreatedDate(cards, actions);
 
     updatedCards = this.appendListName(updatedCards, lists);
-    
+
     return updatedCards;
   }
 
   appendCreatedDate(cards: Card[], actions: Action[]) {
-    return cards.map((card) => {
+    return cards.map(card => {
       const action = actions.find(
-        (action) =>
-          (action.type == "createCard" || action.type == "copyCard") &&
-          action.data.card.id === card.id
+        action =>
+          (action.type == 'createCard' || action.type == 'copyCard') &&
+          action.data.card.id === card.id,
       );
       return {
         ...card,
@@ -177,8 +174,8 @@ class CardService {
   }
 
   appendListName(updatedCards: Card[], lists: List[]) {
-    return updatedCards.map((card) => {
-      const matched = lists.find((list) => card.idList == list.id);
+    return updatedCards.map(card => {
+      const matched = lists.find(list => card.idList == list.id);
 
       return {
         updatedListName: matched?.name,
@@ -189,43 +186,37 @@ class CardService {
 
   filterByStatus(updatedCards: Card[], status: string) {
     const objStatus = {
-      Info: ["General Info", "Template"],
-      Todo: ["Todo"],
-      InProgress: ["In Progress", "Reviewing"],
-      Done: ["Closed", "Classes", "Done"],
+      Info: ['General Info', 'Template'],
+      Todo: ['Todo'],
+      InProgress: ['In Progress', 'Reviewing'],
+      Done: ['Closed', 'Classes', 'Done'],
     };
 
     //Filter
     //list
     const arrStatus = objStatus[status];
     if (status) {
-      updatedCards = updatedCards.filter((card) =>
-        arrStatus.includes(card.updatedListName)
-      );
+      updatedCards = updatedCards.filter(card => arrStatus.includes(card.updatedListName));
     }
     return updatedCards;
   }
 
   filterByDateRange(updatedCards: Card[], fromDate: string, toDate: string) {
     if (fromDate) {
-      updatedCards = updatedCards.filter(
-        (card) => card.createdDate >= fromDate
-      );
+      updatedCards = updatedCards.filter(card => card.createdDate >= fromDate);
     }
 
     if (toDate) {
-      updatedCards = updatedCards.filter((card) => card.createdDate <= toDate);
+      updatedCards = updatedCards.filter(card => card.createdDate <= toDate);
     }
     return updatedCards;
   }
 
   filterByLabel(updatedCards: Card[], label: string) {
     if (label) {
-      updatedCards = updatedCards.filter((card) => {
+      updatedCards = updatedCards.filter(card => {
         const cardLabels = card.labels;
-        const labelExist = cardLabels.some(
-          (labelOfCard) => labelOfCard.name == label
-        );
+        const labelExist = cardLabels.some(labelOfCard => labelOfCard.name == label);
         if (labelExist) {
           return card;
         }
@@ -235,7 +226,7 @@ class CardService {
   }
 
   groupCards(updatedCards: Card[]) {
-    let groupedCardMap = _.groupBy(updatedCards, "updatedListName");
+    let groupedCardMap = _.groupBy(updatedCards, 'updatedListName');
 
     //Group by month of card created
     for (let cardStatus in groupedCardMap) {
@@ -253,7 +244,7 @@ class CardService {
           groupedCardMap,
           cardStatus,
           cardMonth,
-          labelNames
+          labelNames,
         );
         groupedCardMap[cardStatus][cardMonth] = labelCardNumbersMap;
       }
@@ -262,9 +253,9 @@ class CardService {
   }
 
   groupByMonth(cards: Card[]) {
-    return _.groupBy(cards, (card) => {
+    return _.groupBy(cards, card => {
       const createdDate = new Date(card.createdDate);
-      return createdDate.toLocaleString("default", { month: "long" });
+      return createdDate.toLocaleString('default', { month: 'long' });
     });
   }
 
@@ -274,12 +265,12 @@ class CardService {
       for (let cardMonth in groupedCardMap[cardStatus]) {
         //put label list into array
         let cards = groupedCardMap[cardStatus][cardMonth]; //store array of obj created on certain month to letiable
-        _.forEach(cards, (card) => {
+        _.forEach(cards, card => {
           //each card in the result array under certain month
           if (card.labels.length > 0) {
             const filteredLableNames = card.labels
-              .filter((label) => !labelNames.includes(label.name))
-              .map((label) => label.name);
+              .filter(label => !labelNames.includes(label.name))
+              .map(label => label.name);
             labelNames = labelNames.concat(filteredLableNames);
           }
         });
@@ -292,14 +283,14 @@ class CardService {
     groupedCardMap: GroupedCard,
     cardStatus: string,
     cardMonth: string,
-    labelNames: string[]
+    labelNames: string[],
   ) {
     let monthlyCards = groupedCardMap[cardStatus][cardMonth]; //array of cards under certain month
     let labelCardNumbersMap = {
-      "No Label": 0,
+      'No Label': 0,
     };
     let counter = monthlyCards.length;
-    monthlyCards.forEach((card) => {
+    monthlyCards.forEach(card => {
       //run through each card
       let labels = card.labels;
       if (labels.length > 0) {
@@ -315,24 +306,21 @@ class CardService {
           }
         }
       } else {
-        labelCardNumbersMap["No Label"] += 1;
+        labelCardNumbersMap['No Label'] += 1;
       }
       counter -= 1;
     });
 
     if (counter == 0) {
-      if (labelCardNumbersMap["No Label"] == 0) {
-        delete labelCardNumbersMap["No Label"];
+      if (labelCardNumbersMap['No Label'] == 0) {
+        delete labelCardNumbersMap['No Label'];
       }
     }
 
     return labelCardNumbersMap;
   }
- }
+}
 
 const cardService = new CardService();
 
-export {
-  CardService,
-  cardService,
-}
+export { CardService, cardService };

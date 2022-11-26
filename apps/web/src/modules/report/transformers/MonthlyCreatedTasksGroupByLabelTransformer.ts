@@ -6,13 +6,21 @@ class MonthlyCreatedTasksGroupByLabelTransformer {
   }
 
   public getLabels(raw): string[] {
-    const level1 = _.transform(raw, function(result, value, key) {
-      _.merge(result, value);
-    }, {});
+    const level1 = _.transform(
+      raw,
+      function (result, value, key) {
+        _.merge(result, value);
+      },
+      {},
+    );
 
-    const level2 = _.transform(level1, function(result, value, key) {
-      _.merge(result, value);
-    }, {});
+    const level2 = _.transform(
+      level1,
+      function (result, value, key) {
+        _.merge(result, value);
+      },
+      {},
+    );
 
     const labels = Object.keys(level2);
 
@@ -22,47 +30,47 @@ class MonthlyCreatedTasksGroupByLabelTransformer {
   private processCard(card) {
     const labels = this.getLabels(card);
 
-    const restructureFinalCard = (final_card) =>{
-      return final_card.map((item) => {
-        labels.forEach(label => item[label] = 0);
+    const restructureFinalCard = final_card => {
+      return final_card.map(item => {
+        labels.forEach(label => (item[label] = 0));
 
         return item;
       });
-    }
+    };
 
     let final_card_for_chart = [
-      {month:'January'},
-      {month:'February'},
-      {month:'March'},
-      {month:'April'},
-      {month:'May'},
-      {month:'June'},
-      {month:'July'},
-      {month:'August'},
-      {month:'September'},
-      {month:'October'},
-      {month:'November'},
-      {month:'December'}
-    ]
+      { month: 'January' },
+      { month: 'February' },
+      { month: 'March' },
+      { month: 'April' },
+      { month: 'May' },
+      { month: 'June' },
+      { month: 'July' },
+      { month: 'August' },
+      { month: 'September' },
+      { month: 'October' },
+      { month: 'November' },
+      { month: 'December' },
+    ];
 
-    final_card_for_chart = restructureFinalCard(final_card_for_chart)
+    final_card_for_chart = restructureFinalCard(final_card_for_chart);
 
-    for (let card_status in card){
-      for (let month in card[card_status]){
-      //Find index of month, to use it later when storing number of card with certain label
-          let index_of_month = final_card_for_chart.map(card => card.month).indexOf(month)
-          let label_number_map = card[card_status][month]
+    for (let card_status in card) {
+      for (let month in card[card_status]) {
+        //Find index of month, to use it later when storing number of card with certain label
+        let index_of_month = final_card_for_chart.map(card => card.month).indexOf(month);
+        let label_number_map = card[card_status][month];
 
-          for (let each_card in label_number_map){
-              let card = final_card_for_chart[index_of_month]
+        for (let each_card in label_number_map) {
+          let card = final_card_for_chart[index_of_month];
 
-              if (each_card in final_card_for_chart[index_of_month]){
-                  card[each_card]++
-              }
-              else{ //if not in, create new and append
-                  card[each_card] = label_number_map[each_card]
-              }
+          if (each_card in final_card_for_chart[index_of_month]) {
+            card[each_card]++;
+          } else {
+            //if not in, create new and append
+            card[each_card] = label_number_map[each_card];
           }
+        }
       }
     }
 
@@ -152,4 +160,5 @@ Data example
 
 */
 
-export const monthlyCreatedTasksGroupByLabelTransformer = new MonthlyCreatedTasksGroupByLabelTransformer();
+export const monthlyCreatedTasksGroupByLabelTransformer =
+  new MonthlyCreatedTasksGroupByLabelTransformer();

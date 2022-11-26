@@ -1,30 +1,27 @@
-import { useRouter } from "next/router"
+import { useRouter } from 'next/router';
 import { reportApiService } from '../services/ReportApiService';
 import { MonthlyCreatedTasksGroupByLabel } from '../../chart-templates/components/MonthlyCreatedTasksGroupByLabel';
 import { MonthlyCreatedTasksGroupByLabelSettings } from '../../chart-templates/components/MonthlyCreatedTasksGroupByLabelSettings';
 
-export const getServerSideProps = async(context) =>{
-  const {
-    reportData: result,
-    labels
-  } = await reportApiService.getChart(context.query);
+export const getServerSideProps = async context => {
+  const { reportData: result, labels } = await reportApiService.getChart(context.query);
 
-  return{
-    props:{
+  return {
+    props: {
       result,
-      labels
-    }
-  }
-}
+      labels,
+    },
+  };
+};
 
-export const MyReport = ({ result, labels }) =>{
-  const router = useRouter()
+export const MyReport = ({ result, labels }) => {
+  const router = useRouter();
 
-  const handleSubmit = (query) =>{
+  const handleSubmit = query => {
     router.replace({
-      pathname:router.asPath,
-      query
-    })
+      pathname: router.asPath,
+      query,
+    });
     /*let url_with_filter = defaulturl + "?"
     if(status){
       url_with_filter += "status="+status+"&"
@@ -40,19 +37,19 @@ export const MyReport = ({ result, labels }) =>{
     }
 
     fetchData(url_with_filter) */
-  }
+  };
 
-  const fetchAll = () =>{
+  const fetchAll = () => {
     /*
     defaulturl = 'http://localhost:3000/api/reports/chart';
     fetchData(defaulturl) */
-    console.log(router.asPath)
-  }
+    console.log(router.asPath);
+  };
 
-  return(
+  return (
     <div>
       <MonthlyCreatedTasksGroupByLabelSettings onSubmit={handleSubmit} fetchAll={fetchAll} />
       <MonthlyCreatedTasksGroupByLabel result={result} labels={labels} />
     </div>
-  )
-}
+  );
+};

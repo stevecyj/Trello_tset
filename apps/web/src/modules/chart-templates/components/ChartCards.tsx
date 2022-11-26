@@ -7,13 +7,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Router from 'next/router';
 
-const viewChart = () =>{
-  Router.replace('/charts/monthly-created-cards-group-by-label')
-}
+const viewChart = () => {
+  Router.replace('/charts/monthly-created-cards-group-by-label');
+};
 
 export const ChartCards = () => {
   return (
-    <Card onClick={viewChart} sx={{ cursor:'pointer', m:2, maxWidth: 345 }}>
+    <Card onClick={viewChart} sx={{ cursor: 'pointer', m: 2, maxWidth: 345 }}>
       <CardMedia
         component="img"
         alt="chart"
@@ -22,7 +22,7 @@ export const ChartCards = () => {
       />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
-        Cards created monthly (Grouped By Label)
+          Cards created monthly (Grouped By Label)
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Stacked Bar Chart
@@ -33,4 +33,4 @@ export const ChartCards = () => {
       </CardActions>
     </Card>
   );
-}
+};

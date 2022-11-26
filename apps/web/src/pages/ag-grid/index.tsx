@@ -1,3 +1,3 @@
-import {AgGrid} from "../modules/report/pages/MyReport"
+import { AgGrid } from '../modules/report/pages/MyReport';
 
-export default AgGrid
+export default AgGrid;

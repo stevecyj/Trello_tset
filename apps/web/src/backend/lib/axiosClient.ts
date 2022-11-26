@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import debug from 'debug';
 const debugLog = debug('trello:axios');
 const errorLog = debug('trello:axios:error');
@@ -8,7 +8,7 @@ class AxiosClient {
     try {
       debugLog(`url: ${url}`);
 
-      const response =  await axios.get(url);
+      const response = await axios.get(url);
       debugLog(`statusCode: ${response.status}`);
 
       return response.data;

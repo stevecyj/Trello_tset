@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { trelloAdapter } from '../../../backend/adapters/trelloAdapter';
 import { cardService } from '../../../backend/services/cardService';
@@ -8,18 +8,15 @@ import { cardService } from '../../../backend/services/cardService';
  *
  * @description To display number of cards created in a month (with filter and group)
  */
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== "GET") {
-    res.setHeader("Allow", ["GET"]);
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'GET') {
+    res.setHeader('Allow', ['GET']);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  const generateReport = async() =>{
+  const generateReport = async () => {
     const { from, to, status, label } = req.query;
-    
+
     const board = await trelloAdapter.getBoard();
 
     const { cards, actions, lists } = board;
@@ -31,9 +28,9 @@ export default async function handler(
     let groupedCardMap = cardService.groupCards(updatedCards);
 
     res.json(groupedCardMap);
-  }
+  };
 
-  const filterCards = (updatedCards, status, label, from, to) =>{
+  const filterCards = (updatedCards, status, label, from, to) => {
     updatedCards = cardService.filterByStatus(updatedCards, status);
 
     updatedCards = cardService.filterByLabel(updatedCards, label);
@@ -41,8 +38,7 @@ export default async function handler(
     updatedCards = cardService.filterByDateRange(updatedCards, from, to);
 
     return updatedCards;
-  }
-    
+  };
+
   await generateReport();
-  
 }

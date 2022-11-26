@@ -1,19 +1,18 @@
-import * as React from 'react';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Router from 'next/router';
 
-const viewChart = () =>{
-  Router.replace('/cardDetails')
-}
+const viewChart = () => {
+  Router.push('/charts/monthly-created-cards-group-by-label');
+};
 
 export const ChartCards = () => {
   return (
-    <Card onClick={viewChart} sx={{ cursor:'pointer', m:2, maxWidth: 345 }}>
+    <Card onClick={viewChart} sx={{ cursor: 'pointer', m: 2, maxWidth: 345 }}>
       <CardMedia
         component="img"
         alt="chart"
@@ -22,7 +21,7 @@ export const ChartCards = () => {
       />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
-        Cards created monthly (Grouped By Label)
+          Cards created monthly (Grouped By Label)
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Stacked Bar Chart
@@ -33,4 +32,4 @@ export const ChartCards = () => {
       </CardActions>
     </Card>
   );
-}
+};

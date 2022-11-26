@@ -6,19 +6,24 @@ import Typography from '@mui/material/Typography';
 import Router from 'next/router';
 import Button from '@mui/material/Button';
 
-const BackToChartPage = () =>{
-    Router.replace('/')
-}
+const BackToChartPage = () => {
+  Router.replace('/');
+};
 
-export const NavigationMenu =() => {
+export const NavigationMenu = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{ margin: 0 }} position="static">
         <Toolbar>
-            <Typography onClick={BackToChartPage} variant="h6" component="div" sx={{ cursor:'pointer', flexGrow: 0.05 }}>
+          <Typography
+            onClick={BackToChartPage}
+            variant="h6"
+            component="div"
+            sx={{ cursor: 'pointer', flexGrow: 0.05 }}
+          >
             Charts
           </Typography>
-          
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 0.05 }}>
             Reports
           </Typography>
@@ -27,4 +32,4 @@ export const NavigationMenu =() => {
       </AppBar>
     </Box>
   );
-}
+};

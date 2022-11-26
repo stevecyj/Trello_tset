@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Router from 'next/router';
 
 const viewChart = () =>{
-  Router.replace('/cardDetails')
+  Router.replace('/charts/monthly-created-cards-group-by-label')
 }
 
 export const ChartCards = () => {

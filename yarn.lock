@@ -970,6 +970,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@onr/prettier-config@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@onr/prettier-config/-/prettier-config-1.1.1.tgz#3bfa6efe7ac67f372bac017fede8e2af5798f59c"
+  integrity sha512-U8AYJlLxb5zT2j3MlzZHgeuDH9GhCuX7cHnu115MUfmp4k8h9cFQUy92Pg5yQmhSKJ1JKOFxnClKtKa+Qdlqtg==
+
 "@popperjs/core@^2.11.6":
   version "2.11.6"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"

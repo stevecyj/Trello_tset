@@ -1,5 +1,5 @@
-import { monthlyCreatedTasksGroupByLabelTransformer } from './../transformers/MonthlyCreatedTasksGroupByLabelTransformer';
 import axios from 'axios';
+import { monthlyCreatedTasksGroupByLabelTransformer } from './../transformers/MonthlyCreatedTasksGroupByLabelTransformer';
 class ReportApiService {
   async getChart(query: any) {
     const params = new URLSearchParams(query);

@@ -1,13 +1,11 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Router from 'next/router';
-import Button from '@mui/material/Button';
 
 const BackToChartPage = () => {
-  Router.replace('/');
+  Router.push('/');
 };
 
 export const NavigationMenu = () => {

@@ -10,6 +10,10 @@ const viewChart = () => {
   Router.push('/charts/monthly-created-cards-group-by-label');
 };
 
+const editFilter = () => {
+  Router.push('/charts/edit-chart-filters');
+};
+
 export const ChartCards = () => {
   return (
     <Card sx={{ cursor: 'pointer', m: 2, maxWidth: 345 }}>
@@ -29,7 +33,7 @@ export const ChartCards = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
+        <Button onClick={editFilter} size="small">Edit</Button>
       </CardActions>
     </Card>
   );

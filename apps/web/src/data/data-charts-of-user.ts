@@ -13,7 +13,8 @@ export const chartDataForUsers =[
                 "from":"",
                 "to":""
             },
-        }
+        },
+        "apiUrl":'http://localhost:3000/api/reports/chart?'
     },
     {
         "chartID":2,
@@ -29,6 +30,7 @@ export const chartDataForUsers =[
                 "from":"",
                 "to":""
             },
-        }
+        },
+        "apiUrl":'http://localhost:3000/api/reports/chart?'
     },
 ];

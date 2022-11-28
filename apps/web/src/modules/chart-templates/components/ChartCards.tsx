@@ -6,15 +6,16 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Router from 'next/router';
 
-const viewChart = () => {
-  Router.push('/charts/monthly-created-cards-group-by-label');
-};
-
-const editFilter = () => {
-  Router.push('/charts/edit-chart-filters');
-};
-
 export const ChartCards = ({chart}) => {
+  const viewChart = () => {
+    //Router.push('/charts/monthly-created-cards-group-by-label');
+    Router.push(`/charts/${chart.chartID}`);
+  };
+
+  const editFilter = () => {
+    Router.push('/charts/edit-chart-filters');
+  };
+
   return (
     <Card sx={{ cursor: 'pointer', m: 2, maxWidth: 345 }}>
       <CardMedia

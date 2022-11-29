@@ -13,16 +13,17 @@ export const getServerSideProps = async context => {
     return {
         props: {
             result,
-            labels
+            labels,
+            chart
         },
     };
 };
 
-export const MyChartDetails = ({result,labels}) => {
+export const MyChartDetails = ({result,labels,chart}) => {
     return (
         <div> 
         <NavigationMenu />
-        <MonthlyCreatedTasksGroupByLabel result={result} labels={labels} />
+        <MonthlyCreatedTasksGroupByLabel result={result} labels={labels} chartinfo={chart} />
         </div>
     );
 };

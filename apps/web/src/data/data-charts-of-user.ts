@@ -31,6 +31,6 @@ export const chartDataForUsers =[
                 "to":""
             },
         },
-        "apiUrl":'http://localhost:3000/api/reports/chart?'
+        "apiUrl":'http://localhost:3000/api/reports/chartMonthlyCompletedCards?'
     },
 ];

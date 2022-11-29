@@ -1,29 +1,28 @@
 import { chartDataForUsers } from '../../../data/data-charts-of-user';
+import { NavigationMenu } from '../../chart-templates/components/NavigationMenu';
 import { reportApiService } from '../services/ReportApiService';
 
 export const getServerSideProps = async context => {
     const { chartID } = context.query
-    const currentChart = chartDataForUsers.filter(chart => 
-        chart.chartID == chartID
+    const chart = chartDataForUsers.filter(eachchart => 
+        eachchart.chartID == chartID
     )
-    const apiurl = currentChart[0]
-    const { reportData: result, labels } = await reportApiService.getChart(currentChart.apiUrl,context.query);
+    //const { reportData: result, labels } = await reportApiService.getChart(chart[0].apiUrl, context.query);
+    const result = await reportApiService.getChart(chart[0].apiUrl, context.query);
 
     return {
         props: {
             result,
-            labels,
-            chartID,
-            currentChart
+            //labels
         },
     };
 };
 
-export const MyChartDetails = ({ result, labels, chartID,currentChart}) => {
-    console.log(currentChart[0].apiUrl)
+export const MyChartDetails = ({ result}) => {
+    console.log(result)
     return (
         <div> 
-        {/* <NavigationMenu /> */}
+        <NavigationMenu />
         {/* <MonthlyCreatedTasksGroupByLabel result={result} labels={labels} /> */}
         </div>
     );

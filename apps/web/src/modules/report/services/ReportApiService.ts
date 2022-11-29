@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { monthlyCreatedTasksGroupByLabelTransformer } from '../transformers/MonthlyCreatedTasksGroupByLabelTransformer';
 class ReportApiService {
   async getChart(chartapi:any,query: any) {
     let params
@@ -11,11 +12,18 @@ class ReportApiService {
     const getCards = await axios.get(url);
     const card = getCards.data;
 
-    /* const reportData = monthlyCreatedTasksGroupByLabelTransformer.transform(card);
-    const labels = monthlyCreatedTasksGroupByLabelTransformer.getLabels(card); */
-
-    //return { reportData, labels };
-    return card
+    const {chartID} = query
+    let reportData , labels
+    if (chartID == 1){
+        reportData = monthlyCreatedTasksGroupByLabelTransformer.transform(card);
+        labels = monthlyCreatedTasksGroupByLabelTransformer.getLabels(card); 
+    }
+    else{
+      reportData = card
+      labels = ["CardCompleted"]
+    }
+    
+    return {reportData,labels}
   }
 }
 

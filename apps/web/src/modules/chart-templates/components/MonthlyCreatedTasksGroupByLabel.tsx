@@ -1,20 +1,10 @@
 import { AgChartsReact } from 'ag-charts-react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useRouter } from 'next/router';
 
 export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) => {
   const [loading, setLoading] = useState(true);
   const [options, setOption] = useState(null);
-
-  const [status, setStatus] = useState('');
-  const [label, setLabel] = useState('');
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-
-  const router = useRouter();
 
   useEffect(() => {
     setDataForChart(result);
@@ -27,7 +17,6 @@ export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) => {
         xKey: 'month',
         yKey: label,
         yName: label,
-        //normalizedTo: 100,
         stacked: true,
       };
     });

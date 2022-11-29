@@ -92,11 +92,28 @@ class CardService {
   }
 
   getMonthlyCompletedCardNumberMap(groupedCard : GroupedCard){
+    let cardMonthNumberOfCompletedCardMap = [
+      { month: 'January', CardCompleted : 0 },
+      { month: 'February', CardCompleted : 0 },
+      { month: 'March' , CardCompleted : 0 },
+      { month: 'April' , CardCompleted : 0 },
+      { month: 'May' , CardCompleted : 0 },
+      { month: 'June' , CardCompleted : 0 },
+      { month: 'July' , CardCompleted : 0 },
+      { month: 'August' , CardCompleted : 0 },
+      { month: 'September' , CardCompleted : 0 },
+      { month: 'October' , CardCompleted : 0 },
+      { month: 'November' , CardCompleted : 0 },
+      { month: 'December' , CardCompleted : 0 },
+    ]
+    
     for (let card in groupedCard){
-      groupedCard[card] = groupedCard[card].length
+      let index_of_month = cardMonthNumberOfCompletedCardMap.map(card => card.month).indexOf(card);
+      let finalcard = cardMonthNumberOfCompletedCardMap[index_of_month]
+      finalcard["CardCompleted"] = groupedCard[card].length
     }
-
-    return groupedCard
+    
+    return cardMonthNumberOfCompletedCardMap
   }
 }
 

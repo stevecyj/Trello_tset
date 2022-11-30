@@ -13,7 +13,7 @@ export const ChartCards = ({chart}) => {
   };
 
   const editFilter = () => {
-    Router.push('/charts/edit-chart-filters');
+    Router.push(`/charts/edit-chart-filters/${chart.chartID}`);
   };
 
   return (

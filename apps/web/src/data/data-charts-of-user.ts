@@ -8,8 +8,8 @@ export const chartDataForUsers =[
             "chartMainName":"Monthly Created Card",
             "chartSubName":"Group by Label",
             "chartFilters":{
-                "label":"",
                 "status":"",
+                "label":"",
                 "from":"",
                 "to":""
             },
@@ -25,8 +25,6 @@ export const chartDataForUsers =[
             "chartMainName":"Monthly Completed Tasks",
             "chartSubName":"Group by Label",
             "chartFilters":{
-                "label":"",
-                "status":"",
                 "from":"",
                 "to":""
             },

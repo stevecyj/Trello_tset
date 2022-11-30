@@ -5,10 +5,11 @@ import { reportApiService } from '../services/ReportApiService';
 
 export const getServerSideProps = async context => {
     const { chartID } = context.query
-    const chart = chartDataForUsers.filter(eachchart => 
+    const charts = chartDataForUsers.filter(eachchart => 
         eachchart.chartID == chartID
     )
-    const { reportData: result, labels } = await reportApiService.getChart(chart[0].apiUrl, context.query);
+    const chart = charts[0]
+    const { reportData: result, labels } = await reportApiService.getChart(chart);
 
     return {
         props: {

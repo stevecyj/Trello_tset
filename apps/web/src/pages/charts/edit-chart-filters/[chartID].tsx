@@ -1,4 +1,4 @@
-import { MonthlyCreatedTasksGroupByLabelSettings } from "../../../modules/chart-templates/components/MonthlyCreatedTasksGroupByLabelSettings";
-export { getServerSideProps } from "../../../modules/chart-templates/components/MonthlyCreatedTasksGroupByLabelSettings";
+import { MyChartFilter } from "../../../modules/report/pages/MyChartFilter";
+export { getServerSideProps } from "../../../modules/report/pages/MyChartFilter";
 
-export default MonthlyCreatedTasksGroupByLabelSettings;
+export default MyChartFilter;

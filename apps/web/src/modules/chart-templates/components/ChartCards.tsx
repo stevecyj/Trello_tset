@@ -17,7 +17,7 @@ export const ChartCards = ({chart}) => {
   };
 
   return (
-    <Card sx={{ cursor: 'pointer', m: 2, maxWidth: 345 }}>
+    <Card sx={{ cursor: 'pointer', m: 2, width: 345 }}>
       <CardMedia
         onClick={viewChart}
         component="img"

@@ -1,21 +1,12 @@
 import { AgChartsReact } from 'ag-charts-react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useRouter } from 'next/router';
 
-export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) => {
+export const MonthlyCreatedTasksGroupByLabel = ({ result, labels, chartinfo }) => {
   const [loading, setLoading] = useState(true);
   const [options, setOption] = useState(null);
-
-  const [status, setStatus] = useState('');
-  const [label, setLabel] = useState('');
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-
-  const router = useRouter();
-
+  const chartdetails = chartinfo[0]
+  
   useEffect(() => {
     setDataForChart(result);
   }, [result]);
@@ -27,17 +18,16 @@ export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) => {
         xKey: 'month',
         yKey: label,
         yName: label,
-        //normalizedTo: 100,
         stacked: true,
       };
     });
 
     setOption({
       title: {
-        text: 'Monthly Created Card',
+        text: chartdetails.chartDetails.chartMainName,
       },
       subtitle: {
-        text: 'Group by Label',
+        text: chartdetails.chartDetails.chartSubName,
       },
       data: result,
       series,
@@ -62,7 +52,7 @@ export const MonthlyCreatedTasksGroupByLabel = ({ result, labels }) => {
   return (
     <div>
       <div id="Container">
-        {loading ? <div>Loading...</div> : <AgChartsReact options={options} />}
+      {loading ? <div>Loading...</div> : <AgChartsReact options={options} />}
       </div>
     </div>
   );

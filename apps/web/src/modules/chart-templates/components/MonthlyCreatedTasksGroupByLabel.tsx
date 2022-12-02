@@ -5,8 +5,7 @@ import { useEffect, useState } from 'react';
 export const MonthlyCreatedTasksGroupByLabel = ({ result, labels, chartinfo }) => {
   const [loading, setLoading] = useState(true);
   const [options, setOption] = useState(null);
-  const chartdetails = chartinfo[0]
-  
+ 
   useEffect(() => {
     setDataForChart(result);
   }, [result]);
@@ -24,10 +23,10 @@ export const MonthlyCreatedTasksGroupByLabel = ({ result, labels, chartinfo }) =
 
     setOption({
       title: {
-        text: chartdetails.chartDetails.chartMainName,
+        text: chartinfo.chartDetails.chartMainName,
       },
       subtitle: {
-        text: chartdetails.chartDetails.chartSubName,
+        text: chartinfo.chartDetails.chartSubName,
       },
       data: result,
       series,

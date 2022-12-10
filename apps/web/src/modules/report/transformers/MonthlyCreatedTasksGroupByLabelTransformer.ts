@@ -58,7 +58,15 @@ class MonthlyCreatedTasksGroupByLabelTransformer {
     for (let card_status in card) {
       for (let month in card[card_status]) {
         //Find index of month, to use it later when storing number of card with certain label
-        let index_of_month = final_card_for_chart.map(card => card.month).indexOf(month);
+        let index_of_month = final_card_for_chart
+          .map(card => {
+            console.log(
+              '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+              card.month,
+            );
+            card.month;
+          })
+          .indexOf(card.month);
         let label_number_map = card[card_status][month];
 
         for (let each_card in label_number_map) {

@@ -160,15 +160,15 @@ class CardService {
   }
 
   appendCreatedDate(cards: Card[], actions: Action[]) {
+    const cardGroupByAction = _.groupBy(actions, 'data.card.id');
+
     return cards.map(card => {
-      const action = actions.find(
-        action =>
-          (action.type == 'createCard' || action.type == 'copyCard') &&
-          action.data.card.id === card.id,
-      );
+      const cardActions = cardGroupByAction[card.id];
+      const sortedActions = _.sortBy(cardActions, 'date');
+
       return {
         ...card,
-        createdDate: action?.date,
+        createdDate: sortedActions[0]?.date,
       };
     });
   }
